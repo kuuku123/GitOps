@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Deploy start') {
       steps {
-        slackSend(message: "Deploy ${env.BUILD_NUMBER} Started ${env.BUILD_URL}"
+        slackSend(message: "Deploy ${env.BUILD_NUMBER} Started ${env.BUILD_URL} , notifyCommitters: true"
         , color: 'good', tokenCredentialId: 'slack-key')
       }
     }      
@@ -18,7 +18,7 @@ pipeline {
     stage('k8s deploy'){
       steps {
         slackSend(message: "Deploy ${env.BUILD_NUMBER} k8s deploy Started"
-        , color: 'good', tokenCredentialId: 'slack-key')
+        , color: 'good', tokenCredentialId: 'slack-key', failOnError: true)
         kubernetesDeploy(kubeconfigId: 'kubeconfig',
                          configs: '*.yaml')
       }
