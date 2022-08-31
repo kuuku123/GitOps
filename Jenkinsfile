@@ -9,7 +9,7 @@ pipeline {
     }      
     stage('git pull') {
       steps {
-        slackSend(message: "Deploy ${env.BUILD_NUMBER} Started"
+        slackSend(message: "Deploy ${env.BUILD_NUMBER} git pull Started"
         , color: 'good', tokenCredentialId: 'slack-key')
         // https://github.com/kuuku123/GitOps.git will replace by sed command before RUN
         git url: 'https://github.com/kuuku123/GitOps.git', branch: 'main'
@@ -17,7 +17,7 @@ pipeline {
     }
     stage('k8s deploy'){
       steps {
-        slackSend(message: "Deploy ${env.BUILD_NUMBER} Started"
+        slackSend(message: "Deploy ${env.BUILD_NUMBER} k8s deploy Started"
         , color: 'good', tokenCredentialId: 'slack-key')
         kubernetesDeploy(kubeconfigId: 'kubeconfig',
                          configs: '*.yaml')
