@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Deploy start') {
       steps {
-        slackSend(message: "Deploy ${env.BUILD_NUMBER} Started ${env.BUILD_URL} , notifyCommitters: true"
+        slackSend(message: "Deploy ${env.BUILD_NUMBER} Started ${env.BUILD_URL}"
         , color: 'good', tokenCredentialId: 'slack-key')
       }
     }      
@@ -39,10 +39,10 @@ pipeline {
   }
   post {
       success {
-          slackSend (channel: '#migrator', color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+          slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})",tokenCredentialId: 'slack-key')
       }
       failure {
-          slackSend (channel: '#migrator', color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+          slackSend (color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})",tokenCredentialId: 'slack-key')
       }
   }
 }
