@@ -1,4 +1,4 @@
-apiVersion: v123
+apiVersion: v1
 kind: Service
 metadata:
   name: gitops-nginx
