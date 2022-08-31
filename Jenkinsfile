@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Deploy start') {
       steps {
-        slackSend(message: "Deploy ${env.BUILD_NUMBER} Started"
+        slackSend(message: "Deploy ${env.BUILD_NUMBER} Started ${env.BUILD_URL}"
         , color: 'good', tokenCredentialId: 'slack-key')
       }
     }      
